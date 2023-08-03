@@ -1,21 +1,21 @@
-var express = require('express');
-var router = express.Router();
-const bodyParser = require('body-parser');
-const nodemailer = require('nodemailer');
+var express = require('express')
+var router = express.Router()
+const bodyParser = require('body-parser')
+const nodemailer = require('nodemailer')
 
-router.use(bodyParser.json());
-router.use(express.urlencoded({ extended: true }));
+router.use(bodyParser.json())
+router.use(express.urlencoded({ extended: true }))
 
 /**메인 */
-router.get('/', function(req, res, next) {
-  res.sendFile(__dirname + "/index.html");
-});
+router.get('/', function (req, res, next) {
+  res.sendFile(__dirname + '/index.html')
+})
 
 /**메일 전송 */
-router.post('/sendMail', async function(req, res, next) {
-  var json = req.body;
-  console.log(json.mailContent);
-
+router.post('/sendMail', async function (req, res, next) {
+  var json = req.body
+  console.log(json.mailContent)
+  /*
   try{
     const transport = nodemailer.createTransport({
       host: 'smtp.daum.net',
@@ -43,7 +43,7 @@ router.post('/sendMail', async function(req, res, next) {
   }catch (err) {
     console.log(err);
     return res.send({"message": '메일 전송에 실패했습니다. 다시 시도해주세요' });
-  }
-}); 
+  }*/
+})
 
-module.exports = router;
+module.exports = router

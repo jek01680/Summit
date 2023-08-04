@@ -2,14 +2,16 @@ var express = require('express');
 var router = express.Router();
 const bodyParser = require('body-parser');
 const nodemailer = require('nodemailer');
+const path = require('path');
 
 router.use(bodyParser.json());
 router.use(express.urlencoded({ extended: true }));
 
 /**메인 */
 router.get('/', function(req, res, next) {
-  res.sendFile(__dirname + "/index.html");
+  res.sendFile(path.join(__dirname, '../views/index.html'));
 });
+
 
 /**메일 전송 */
 router.post('/sendMail', async function(req, res, next) {

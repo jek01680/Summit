@@ -2,14 +2,19 @@ var express = require('express');
 var router = express.Router();
 const bodyParser = require('body-parser');
 const nodemailer = require('nodemailer');
+const path = require('path');
+
+const MAIL_PWD = 'sec!8814307!';
+const MAIL = 'summit@summitkr.com';
 
 router.use(bodyParser.json());
 router.use(express.urlencoded({ extended: true }));
 
 /**메인 */
 router.get('/', function(req, res, next) {
-  res.sendFile(__dirname + "/index.html");
+  res.sendFile(path.join(__dirname, '../views/index.html'));
 });
+
 
 /**메일 전송 */
 router.post('/sendMail', async function(req, res, next) {
@@ -24,15 +29,15 @@ router.post('/sendMail', async function(req, res, next) {
       // 이메일을 보낼 계정 데이터 입력
       auth: { 
         user: 'summit.kr',
-        pass: 'sec!8814307!'
+        pass: MAIL_PWD
       },
-      from: 'summit@summitkr.com'
+      from: MAIL
     });
   
     // 옵션값 설정
     const options = {
-      from: 'summit@summitkr.com',
-      to: 'summit4307@gmail.com',
+      from: 'summit.kr@daum.net',
+      to: MAIL,
       subject: '홈페이지 메일 문의 건 입니다',
       html: json.mailContent,
     };

@@ -7,6 +7,8 @@
 var app = require('../app')
 var debug = require('debug')('my-express:server')
 var http = require('http')
+const https = require('https')
+const express = require('express')
 
 /**
  * Get port from environment and store in Express.

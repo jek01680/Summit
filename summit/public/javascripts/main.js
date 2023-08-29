@@ -11,7 +11,7 @@ function sendMail(){
                     ${message}`
     };
 
-    let submit = fetch('http://localhost:3000/sendMail', {
+    let submit = fetch(`${location.pathname}/sendMail`, {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json;charset=UTF-8',

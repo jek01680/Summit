@@ -20,7 +20,6 @@ router.get('/', function (req, res, next) {
 /**메일 전송 */
 router.post('/sendMail', async function (req, res, next) {
   var json = req.body
-  console.log(json.mailContent)
 
   try {
     const transport = nodemailer.createTransport({
@@ -44,7 +43,6 @@ router.post('/sendMail', async function (req, res, next) {
     }
 
     let send = await transport.sendMail(options)
-    console.log(`Message Sent: `, options)
     return res.send({ message: '메일이 전송되었습니다' })
   } catch (err) {
     console.log(err)

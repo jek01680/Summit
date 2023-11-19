@@ -1,23 +1,3 @@
-document.addEventListener('DOMContentLoaded', function () {
-    const contactForm = document.getElementById('contactForm');
-    const submitButton = document.getElementById('submitButton');
-
-    contactForm.addEventListener('input', function () {
-        let name = document.getElementById('name').value;
-        let email = document.getElementById('email').value;
-        let phone = document.getElementById('phone').value;
-        let message = document.getElementById('message').value;
-    
-        let isFormValid = name && email && phone && message;
-    
-        if (isFormValid) {
-          submitButton.classList.remove('disabled');
-        } else {
-          submitButton.classList.add('disabled');
-        }
-      });
-});
-
 function sendMail(event) {
     event.preventDefault();
 

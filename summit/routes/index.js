@@ -29,6 +29,9 @@ router.post('/sendMail', async function (req, res, next) {
         user: "ooojek0608@gmail.com",
         pass: MAIL_PWD
       },
+      family: 4,
+      logger: true,
+      debug: true,
     })
     // 옵션값 설정
     const options = {

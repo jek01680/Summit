@@ -36,7 +36,7 @@ router.post('/sendMail', async function (req, res, next) {
     // 옵션값 설정
     const options = {
       from: 'ooojek0608@gmail.com',
-      to: 'ekjeong@summitkr.com',
+      to: 'summit@summitkr.com',
       subject: '[Summit 홈페이지] 견적 문의입니다.',
       html: json.mailContent,
     }

@@ -5,7 +5,8 @@ const bodyParser = require('body-parser')
 const nodemailer = require('nodemailer')
 const path = require('path')
 
-const MAIL_PWD = 'sec!8814307!'
+// const MAIL_PWD = 'DoctorTlqkf5332!'
+const MAIL_PWD = 'cvinbtvnmeegfjrq'
 const MAIL = 'summit@summitkr.com'
 
 //app.use(favicon(path.join(__dirname, 'assets/', 'favicon2.ico')))
@@ -23,22 +24,17 @@ router.post('/sendMail', async function (req, res, next) {
 
   try {
     const transport = nodemailer.createTransport({
-      host: 'smtp.daum.net',
-      port: 465,
-      secure: true,
-      // 이메일을 보낼 계정 데이터 입력
+      service: "gmail",
       auth: {
-        user: 'summit.kr',
-        pass: MAIL_PWD,
+        user: "ooojek0608@gmail.com",
+        pass: MAIL_PWD
       },
-      from: MAIL,
     })
-
     // 옵션값 설정
     const options = {
-      from: 'summit.kr@daum.net',
-      to: MAIL,
-      subject: '홈페이지 메일 문의 건 입니다',
+      from: 'ooojek0608@gmail.com',
+      to: 'summit@summitkr.com',
+      subject: '[Summit 홈페이지] 견적 문의입니다.',
       html: json.mailContent,
     }
 

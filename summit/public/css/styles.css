@@ -146,19 +146,99 @@ body {
 }
 
 /* Timeline (History) */
-.history-image {
-  display: flex;
-  justify-content: center; /* 가운데 정렬 */
-  margin: 40px auto;
+.timeline {
+  position: relative;
+  margin: 2rem auto;
+  padding: 2rem 0;
+  width: 100%;
 }
 
-.history-image img {
+/* 중앙 세로선 */
+.timeline::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 3px;
+  height: 100%;
+  background: #0030ff;
+}
+
+.timeline-item {
+  position: relative;
+  width: 50%;
+  padding: 20px 40px;
+  box-sizing: border-box;
+}
+
+.timeline-item.left {
+  left: 0;
+  text-align: right;
+}
+
+.timeline-item.right {
+  left: 50%;
+  text-align: left;
+}
+
+/* 점 */
+.timeline-dot {
+  position: absolute;
+  top: 30px; /* 각 아이템 내에서 점 위치 */
+  left: 100%; /* 기본값: 왼쪽 아이템용 */
+  transform: translate(-50%, -50%);
+  width: 14px;
+  height: 14px;
+  background: #0030ff;
+  border-radius: 50%;
+}
+
+/* 오른쪽 아이템 점 위치 */
+.timeline-item.right .timeline-dot {
+  left: 0%;
+  transform: translate(-50%, -50%);
+}
+
+/* 가로선 */
+.timeline-item.left .timeline-dot::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  right: 100%;
+  width: 30px;
+  height: 2px;
+  background: #0030ff;
+}
+
+.timeline-item.right .timeline-dot::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 100%;
+  width: 30px;
+  height: 2px;
+  background: #0030ff;
+}
+
+/* 텍스트 */
+.timeline-content .year {
+  font-weight: bold;
+  color: #0030ff;
   display: block;
-  max-width: 80%;   /* 화면 크기에 맞게 조정 */
-  height: auto;
-  margin: 0 auto;   /* 가운데 정렬 */
-  border-radius: 0; /* 모서리 라운드 제거 */
-  box-shadow: none; /* 그림자 제거 */
+  margin-bottom: 5px;
+  font-size: 0.95rem;   /* 년도 폰트 크기 줄임 */
+}
+.timeline-content h3 {
+  margin: 2px 0;
+  font-weight: 600;
+  font-size: 1rem;      /* 타이틀 폰트 크기 줄임 */
+}
+.timeline-content p {
+  margin: 0;
+  color: #555;
+  font-size: 0.85rem;   /* 세부내역 폰트 크기 줄임 */
+  line-height: 1.4;
 }
 
 /* Team */

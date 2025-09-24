@@ -1,12 +1,40 @@
+document.addEventListener("DOMContentLoaded", function () {
+  let lastScrollTop = 0;
+  const header = document.getElementById("header");
+
+  window.addEventListener("scroll", function () {
+    let scrollTop = window.scrollY || document.documentElement.scrollTop;
+
+    if (scrollTop > lastScrollTop) {
+      header.classList.add("hidden");
+    } else {
+      header.classList.remove("hidden");
+    }
+
+    lastScrollTop = scrollTop <= 0 ? 0 : scrollTop; // 음수 방지
+  }, false);
+});
+
 function sendMail(event) {
     event.preventDefault();
 
-    let name = document.getElementById('name').value;
-    let email = document.getElementById('email').value;
-    let phone = document.getElementById('phone').value;
-    let message = document.getElementById('message').value;
+    let name = document.getElementById('name').value.trim();
+    let email = document.getElementById('email').value.trim();
+    let phone = document.getElementById('phone').value.trim();
+    let message = document.getElementById('message').value.trim();
+    let submitButton = document.getElementById('submitButton');
 
-    var mailContent = `
+    if (!name || !email || !phone || !message) {
+        alert("모든 항목을 입력해주세요.");
+        return;
+    }
+
+    // 버튼 비활성화 (중복 클릭 방지)
+    submitButton.disabled = true;
+    submitButton.innerText = "전송 중...";
+
+    // HTML 이메일 본문
+    let mailContent = `
         <div style="font-family: 'Arial', sans-serif; color: #333;">
             <h2 style="color: #4F46E5;">문의자 정보</h2>
             <p><strong>이름(회사명):</strong> ${name}</p>
@@ -16,9 +44,8 @@ function sendMail(event) {
             <p>${message.replace(/\n/g, '<br>')}</p>
         </div>`;
 
-    var json = {
-        "mailContent": mailContent
-    };
+    // 서버로 보낼 데이터
+    var json = { name, email, phone, message, mailContent };
 
     fetch(`${window.location.origin}/sendMail`, {
         method: 'POST',
@@ -29,27 +56,22 @@ function sendMail(event) {
         body: JSON.stringify(json)
     })
     .then(response => {
-        if (!response.ok) {
-            throw new Error('Network response was not ok');
-        }
+        if (!response.ok) throw new Error('서버 응답 오류');
         return response.json();
     })
     .then(data => {
-        alert("메일이 발송되었습니다.\n적어주신 메일로 답변드리겠습니다.");
-        
-        // 입력 컨트롤 값을 초기화
-        document.getElementById('name').value = '';
-        document.getElementById('email').value = '';
-        document.getElementById('phone').value = '';
-        document.getElementById('message').value = '';
-        document.getElementById('name').removeAttribute('disabled');
-        document.getElementById('email').removeAttribute('disabled');
-        document.getElementById('phone').removeAttribute('disabled');
-        document.getElementById('message').removeAttribute('disabled');
-        document.getElementById('submitButton').classList.add('disabled');
-        document.getElementById('submitButton').classList.remove('d-none');
+        if (data.success) {
+            alert("메일이 발송되었습니다.\n적어주신 메일로 답변드리겠습니다.");
+            document.getElementById('contactForm').reset(); // 폼 전체 초기화
+        } else {
+            alert("메일 전송 실패: " + data.message);
+        }
+        submitButton.disabled = false;
+        submitButton.innerText = "제출하기";
     })
     .catch(error => {
-        alert('메일 전송에 실패했습니다. 다시 시도해주세요.'); // 에러 알림
+        alert('메일 전송에 실패했습니다. 다시 시도해주세요.\n' + error.message);
+        submitButton.disabled = false;
+        submitButton.innerText = "제출하기";
     });
 }

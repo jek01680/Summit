@@ -13,6 +13,31 @@ document.addEventListener("DOMContentLoaded", function () {
 
     lastScrollTop = scrollTop <= 0 ? 0 : scrollTop; // 음수 방지
   }, false);
+
+  // 햄버거 메뉴
+  const hamburger = document.getElementById("hamburger");
+  const mainNav = document.getElementById("mainNav");
+  const navOverlay = document.getElementById("navOverlay");
+
+  function closeMenu() {
+    hamburger.classList.remove("active");
+    mainNav.classList.remove("open");
+    navOverlay.classList.remove("active");
+  }
+
+  if (hamburger) {
+    hamburger.addEventListener("click", function () {
+      hamburger.classList.toggle("active");
+      mainNav.classList.toggle("open");
+      navOverlay.classList.toggle("active");
+    });
+
+    navOverlay.addEventListener("click", closeMenu);
+
+    mainNav.querySelectorAll("a").forEach(function (link) {
+      link.addEventListener("click", closeMenu);
+    });
+  }
 });
 
 function sendMail(event) {

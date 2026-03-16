@@ -3,19 +3,30 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>썸밑 엔지니어링 Summit</title>
+  <title>썸밑 엔지니어링 Summit | 선박·발전기 엔진 전문</title>
+  <meta name="description" content="(주)썸밑엔지니어링은 선박용·발전기 엔진 판매 및 정비 전문 기업입니다. MTU, DEUTZ, MWM 공식 대리점. 인천 소재.">
+  <meta name="robots" content="index, follow">
+  <meta name="keywords" content="썸밑엔지니어링, 선박엔진, 발전기엔진, MTU, DEUTZ, MWM, 엔진정비, 인천, Summit Engineering">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="썸밑 엔지니어링 Summit | 선박·발전기 엔진 전문">
+  <meta property="og:description" content="(주)썸밑엔지니어링은 선박용·발전기 엔진 판매 및 정비 전문 기업입니다. MTU, DEUTZ, MWM 공식 대리점.">
+  <meta property="og:image" content="https://summitkr.com/assets/img/Logo_blue.png">
+  <meta property="og:url" content="https://summitkr.com">
+  <meta property="og:locale" content="ko_KR">
+  <meta property="og:site_name" content="썸밑엔지니어링">
+  <link rel="canonical" href="https://summitkr.com">
   <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
   <link rel="stylesheet" href="/css/styles.css?v=<%= Date.now() %>">
-  <script src="/javascripts/main.js"></script>
-  <script src="/javascripts/scripts.js"></script> 
+  <script src="/javascripts/main.js" defer></script>
+  <script src="/javascripts/scripts.js" defer></script>
 </head>
 <body>
-  
+
   <header id="header">
     <div class="logo">
       <a href="/"><img src="/assets/img/Logo_blue.png" alt="Summit Logo" style="height:50px;"></a>
     </div>
-    <nav>
+    <nav id="mainNav">
       <ul>
         <!-- <li><a href="/">메인</li> -->
         <li><a href="/business">비즈니스</a></li>
@@ -24,4 +35,10 @@
         <li><a href="/contact">견적문의</a></li>
       </ul>
     </nav>
+    <button class="hamburger" id="hamburger" aria-label="메뉴 열기">
+      <span></span>
+      <span></span>
+      <span></span>
+    </button>
   </header>
+  <div class="nav-overlay" id="navOverlay"></div>
